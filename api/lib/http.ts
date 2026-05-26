@@ -9,7 +9,7 @@ export async function http<T>(url: string, fetchOptions: RequestInit): Promise<T
   const res = await fetch(`${API_URL}/${url}`, {
     headers: {
       'Content-Type': 'application/json',
-    },
+    }, 
     ...fetchOptions
   })
 

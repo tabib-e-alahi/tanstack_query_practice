@@ -44,9 +44,44 @@ export interface Meta {
   qrCode: string;
 }
 
+export interface GetProductsParams {
+  limit?: number
+  skip?: number
+  search?: string
+  category?: string
+  sortBy?: string
+  order?: 'asc' | 'desc'
+}
+
 export interface ProductsResponse {
   products: Product[];
   total: number;
   skip: number;
   limit: number;
+}
+
+export interface ProductCategoryDto {
+  slug: string
+  name: string
+  url: string
+}
+
+export interface CreateProductInput {
+  title: string
+  description?: string
+  price?: number
+  category?: string
+}
+
+export interface UpdateProductInput {
+  id: number
+  title?: string
+  description?: string
+  price?: number
+  stock?: number
+}
+
+export interface DeleteProductResponse extends Product {
+  isDeleted: boolean
+  deletedOn: string
 }
