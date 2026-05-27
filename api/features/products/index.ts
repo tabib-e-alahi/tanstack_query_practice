@@ -1,3 +1,3 @@
 
 // types
-export type {Product, ProductsResponse, Meta, Review} from './products.types';
+export type {Product, ProductsResponse, Meta, Review, GetProductsParams} from './products.types';
