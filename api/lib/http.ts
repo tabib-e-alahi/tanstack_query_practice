@@ -4,7 +4,7 @@ if(!API_URL){
   throw new Error("API URL is not defined.");
 }
 
-export async function http<T>(url: string, fetchOptions: RequestInit): Promise<T>{
+export async function http<T>(url: string, fetchOptions?: RequestInit): Promise<T>{
 
   const res = await fetch(`${API_URL}/${url}`, {
     headers: {
