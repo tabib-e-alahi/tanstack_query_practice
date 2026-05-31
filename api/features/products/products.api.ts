@@ -32,26 +32,26 @@ const productApi = {
         q: params.search,
       }).toString()
 
-      return http<ProductsResponse>(`/products/search?${query}`)
+      return http<ProductsResponse>(`products/search?${query}`)
     }
 
     if (params.category) {
-      return http<ProductsResponse>(`/products/category/${params.category}`)
+      return http<ProductsResponse>(`products/category/${params.category}`)
     }
 
-    return http<ProductsResponse>(`/products${buildProductQuery(params)}`)
+    return http<ProductsResponse>(`products${buildProductQuery(params)}`)
   },
 
   getProductById: (id: number): Promise<Product> => {
-    return http<Product>(`/products/${id}`)
+    return http<Product>(`products/${id}`)
   },
 
   getCategories: (): Promise<ProductCategoryDto[]> => {
-    return http<ProductCategoryDto[]>('/products/categories')
+    return http<ProductCategoryDto[]>('products/categories')
   },
 
   createProduct: (input: CreateProductInput): Promise<Product> => {
-    return http<Product>('/products/add', {
+    return http<Product>('products/add', {
       method: 'POST',
       body: JSON.stringify(input),
     })

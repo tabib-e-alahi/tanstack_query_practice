@@ -1,32 +1,26 @@
 "use client"
 
-import { useEffect, useState } from "react";
+import { useGetProducts } from "@/api/features/products/product.queries";
 import ProductCard from "./_components/Card";
 import { Product, ProductsResponse } from "@/api/features/products";
-import { http } from "@/api/lib/http";
+import { Spinner } from "@/components/ui/spinner";
 
 
 export default function Home() {
-  const [products, setProducts] = useState<Product[]>([]);
+  const { data, isLoading, isFetching, isError, error } = useGetProducts({
+    limit: 12,
+    skip: 0,
+  })
 
-  useEffect(() => {
-    http<ProductsResponse>("products", {
-      method: "GET"
-    }).then((data) => {
-      console.log(data);
-      setProducts(data.products);
-    }).catch((error) => {
-      console.error("Error fetching products:", error);
-    });   
-  }, []);
-
-  console.log(products);
+   if (isLoading) return <Spinner className="size-8" />
+  if (isError) return <p>{error.message}</p>
   return (
     <div className="">
       <main className="max-w-7xl mx-auto p-3 grid grid-cols-5 gap-4">
           {
-            products?.map((product: Product) => <ProductCard key={product.id}></ProductCard>)
+            data?.products.map((product: Product) => <ProductCard key={product.id}></ProductCard>)
           }
+          
       </main>
     </div>
   );
